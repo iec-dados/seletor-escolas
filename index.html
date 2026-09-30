@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selecione sua escola – Instituto Escolas Criativas</title>
+<meta name="robots" content="noindex">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px; line-height: 1.45; color: #1d2150; background: #f1f3fa;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
+  .topo { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; overflow: hidden; }
+  .topo img { display: block; height: 60px; width: auto; margin: 0 0 10px; }
+  .topo h1 { font-size: 18px; margin: 4px 0 2px; color: #26307a; }
+  .topo p { margin: 0; font-size: 14px; color: #555b80; }
+  .card { background: #fff; border-radius: 12px; padding: 18px 16px; margin-bottom: 12px; }
+  .passo { font-size: 13px; font-weight: bold; color: #e5196e; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 0 0 12px; color: #26307a; }
+  label { display: block; font-weight: bold; margin: 0 0 6px; }
+  select, input[type=text], input[type=search] {
+    width: 100%; font-size: 16px; padding: 12px; border: 2px solid #c9cde3; border-radius: 8px;
+    background: #fff; color: #1d2150; -webkit-appearance: none; appearance: none;
+  }
+  select { background-image: linear-gradient(45deg, transparent 50%, #26307a 50%), linear-gradient(135deg, #26307a 50%, transparent 50%);
+    background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 36px; }
+  select:focus, input:focus { outline: none; border-color: #26307a; }
+  .escolhido { background: #eef0fb; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; overflow: hidden; }
+  .escolhido b { display: block; }
+  .link { background: none; border: 0; padding: 0; color: #26307a; text-decoration: underline; font-size: 15px; cursor: pointer; font-family: inherit; }
+  .escolhido .link { float: right; margin-left: 10px; }
+  .lista { margin: 10px 0 0; padding: 0; list-style: none; }
+  .lista li { margin: 0; }
+  .item { display: block; width: 100%; text-align: left; font-family: inherit; font-size: 15px; color: #1d2150;
+    background: #fff; border: 1px solid #dcdff0; border-radius: 8px; padding: 11px 12px; margin-bottom: 6px; cursor: pointer; }
+  .item:active, .item:hover { border-color: #26307a; background: #f6f7fd; }
+  .item small { display: block; color: #5d6390; font-size: 13px; margin-top: 2px; }
+  .aviso { font-size: 14px; color: #5d6390; margin: 8px 0 0; }
+  .erro { background: #fdecf3; border-left: 4px solid #e5196e; padding: 10px 12px; border-radius: 6px; margin-top: 10px; }
+  .filtros { margin: 10px 0 0; }
+  .chip { display: inline-block; font-family: inherit; font-size: 14px; padding: 7px 12px; margin: 0 6px 6px 0;
+    border: 1px solid #c9cde3; border-radius: 20px; background: #fff; color: #26307a; cursor: pointer; }
+  .chip.on { background: #26307a; color: #fff; border-color: #26307a; }
+  .btn { display: block; width: 100%; font-family: inherit; font-size: 17px; font-weight: bold; padding: 15px; border: 0;
+    border-radius: 10px; background: #26307a; color: #fff; cursor: pointer; margin-top: 14px; text-align: center; text-decoration: none; }
+  .btn.sec { background: #fff; color: #26307a; border: 2px solid #26307a; font-size: 16px; padding: 12px; }
+  .naoachei { margin-top: 16px; padding-top: 14px; border-top: 1px solid #e3e5f2; }
+  .conf dt { font-size: 13px; color: #5d6390; margin-top: 8px; }
+  .conf dd { margin: 0; font-weight: bold; }
+  .rodape { font-size: 13px; color: #5d6390; text-align: center; padding: 6px 8px 24px; }
+  .rodape a { color: #26307a; }
+  .oculto { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topo">
+    <img src="logo.png" alt="Instituto Escolas Criativas" onload="document.getElementById('titulo').style.display='none'" onerror="this.style.display='none'">
+    <h1 id="titulo">Instituto Escolas Criativas</h1>
+    <p>Antes de começar, encontre a sua escola.</p>
+  </div>
+
+  <noscript><div class="card erro">Para continuar, ative o JavaScript do navegador.</div></noscript>
+
+  <!-- PASSO 1: UF -->
+  <div class="card" id="c-uf">
+    <p class="passo">Passo 1 de 3</p>
+    <h2>Em qual estado fica a escola?</h2>
+    <label for="uf">Estado (UF)</label>
+    <select id="uf">
+      <option value="">Selecione o estado…</option>
+      <option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option>
+      <option value="AM">Amazonas</option><option value="BA">Bahia</option><option value="CE">Ceará</option>
+      <option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option><option value="GO">Goiás</option>
+      <option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option>
+      <option value="MG">Minas Gerais</option><option value="PA">Pará</option><option value="PB">Paraíba</option>
+      <option value="PR">Paraná</option><option value="PE">Pernambuco</option><option value="PI">Piauí</option>
+      <option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option><option value="RS">Rio Grande do Sul</option>
+      <option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SC">Santa Catarina</option>
+      <option value="SP">São Paulo</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option>
+    </select>
+    <div id="uf-status"></div>
+  </div>
+
+  <!-- PASSO 2: MUNICÍPIO -->
+  <div class="card oculto" id="c-mun">
+    <p class="passo">Passo 2 de 3</p>
+    <h2>Em qual município?</h2>
+    <div id="mun-escolhido"></div>
+    <div id="mun-busca">
+      <label for="mun">Município</label>
+      <input type="search" id="mun" placeholder="Digite o nome do município" autocomplete="off" autocorrect="off" spellcheck="false">
+      <ul class="lista" id="mun-lista"></ul>
+      <p class="aviso"><button type="button" class="link" id="sem-mun">Não sei o município: buscar a escola em todo o estado</button></p>
+    </div>
+  </div>
+
+  <!-- PASSO 3: ESCOLA -->
+  <div class="card oculto" id="c-esc">
+    <p class="passo">Passo 3 de 3</p>
+    <h2>Qual é a escola?</h2>
+    <label for="esc">Nome da escola ou código INEP</label>
+    <input type="search" id="esc" placeholder="Digite parte do nome, em qualquer ordem" autocomplete="off" autocorrect="off" spellcheck="false">
+    <div class="filtros" id="filtros"></div>
+    <p class="aviso" id="esc-info"></p>
+    <ul class="lista" id="esc-lista"></ul>
+    <div class="naoachei">
+      <p class="aviso">Os nomes vêm do Censo Escolar e muitas vezes estão abreviados ou em outra ordem (ex.: “LEO COMMISSARI PADRE EMEB”). Tente digitar só uma palavra marcante do nome.</p>
+      <button type="button" class="btn sec" id="nao-achei">Não encontrei minha escola</button>
+    </div>
+  </div>
+
+  <!-- CONFIRMAÇÃO -->
+  <div class="card oculto" id="c-conf">
+    <h2 id="conf-titulo">Confira a escola</h2>
+    <dl class="conf" id="conf-dados"></dl>
+    <a class="btn" id="ir" href="#">Continuar para o formulário</a>
+    <button type="button" class="btn sec" id="trocar">Voltar e escolher outra</button>
+  </div>
+
+  <p class="rodape">A lista de escolas tem como base o Censo Escolar 2025. Se a sua escola for nova e ainda não tiver código INEP, escreva para <a href="mailto:contato@escolascriativas.org">contato@escolascriativas.org</a> que faremos o cadastro dela.</p>
+</div>
+
+<script>
+/* ===== CONFIGURAÇÃO ===================================================
+   formPadrao: ID do Typeform usado quando o link não traz ?form=...
+   Os nomes dos hidden fields precisam ser iguais aos do Typeform.       */
+var CONFIG = {
+  formPadrao: "EWT2cR3n",
+  typeformBase: "https://form.typeform.com/to/",
+  campos: { escola: "escola", inep: "inep", uf: "uf", municipio: "municipio", dependencia: "dependencia" },
+  maxResultados: 150
+};
+/* ==================================================================== */
+
+(function () {
+  "use strict";
+
+  function $(id) { return document.getElementById(id); }
+
+  // --- ID do formulário: vem de ?form=XXXX (mesmo formato do link antigo)
+  function parametro(nome) {
+    var q = window.location.search.replace(/^\?/, "").split("&");
+    for (var i = 0; i < q.length; i++) {
+      var p = q[i].split("=");
+      if (decodeURIComponent(p[0]) === nome) return decodeURIComponent((p[1] || "").replace(/\+/g, " "));
+    }
+    return "";
+  }
+  var formId = parametro("form");
+  if (!/^[A-Za-z0-9]+$/.test(formId)) formId = CONFIG.formPadrao;
+
+  // --- Normalização: minúsculas, sem acento, sem pontuação
+  var ACENTOS = { "á":"a","à":"a","â":"a","ã":"a","ä":"a","é":"e","è":"e","ê":"e","ë":"e","í":"i","ì":"i","î":"i","ï":"i",
+    "ó":"o","ò":"o","ô":"o","õ":"o","ö":"o","ú":"u","ù":"u","û":"u","ü":"u","ç":"c","ñ":"n" };
+  function norm(s) {
+    s = String(s).toLowerCase().replace(/[áàâãäéèêëíìîïóòôõöúùûüçñ]/g, function (c) { return ACENTOS[c]; });
+    return s.replace(/[^a-z0-9]+/g, " ").replace(/^ +| +$/g, "");
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function tokens(q) { var t = norm(q); return t ? t.split(" ") : []; }
+
+  // Busca: todas as palavras digitadas precisam aparecer (em qualquer ordem).
+  // Palavras que aparecem no início de uma palavra do nome pontuam mais.
+  function filtrar(itens, textoDe, q, limite) {
+    var t = tokens(q), res = [], i, j, s, sc, pos, ok;
+    if (!t.length) return null;
+    for (i = 0; i < itens.length; i++) {
+      s = " " + textoDe(itens[i]);
+      sc = 0; ok = true;
+      for (j = 0; j < t.length; j++) {
+        pos = s.indexOf(t[j]);
+        if (pos < 0) { ok = false; break; }
+        if (s.indexOf(" " + t[j]) >= 0) sc += 2; else sc += 1;
+      }
+      if (ok) res.push({ it: itens[i], sc: sc, o: i });
+    }
+    res.sort(function (a, b) { return b.sc - a.sc || a.o - b.o; });
+    return res;
+  }
+
+  function debounce(fn, ms) {
+    var t;
+    return function () { clearTimeout(t); t = setTimeout(fn, ms); };
+  }
+
+  // --- Estado
+  var dados = null;      // {uf, d, m, e}
+  var cache = {};
+  var munNorm = [];      // nomes normalizados dos municípios
+  var escNorm = [];      // textos normalizados das escolas
+  var munSel = -1;       // índice do município (-1 = estado todo)
+  var depSel = -1;       // filtro de dependência (-1 = todas)
+  var escolaSel = null;  // escola escolhida
+
+  // --- Carregamento do arquivo da UF (XMLHttpRequest funciona em celulares antigos)
+  function carregarUF(uf) {
+    var st = $("uf-status");
+    esconder("c-mun"); esconder("c-esc"); esconder("c-conf");
+    dados = null;
+    if (!uf) { st.innerHTML = ""; return; }
+    if (cache[uf]) { prepararUF(cache[uf]); return; }
+    st.innerHTML = '<p class="aviso">Carregando a lista de escolas…</p>';
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "uf-" + uf + ".json", true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState !== 4) return;
+      if ($("uf").value !== uf) return;
+      var d = null;
+      if (xhr.status === 200 || (xhr.status === 0 && xhr.responseText)) {
+        try { d = JSON.parse(xhr.responseText); } catch (e) { d = null; }
+      }
+      if (!d) {
+        st.innerHTML = '<div class="erro">Não foi possível carregar a lista. Verifique a internet e <button type="button" class="link" id="tentar">tente de novo</button>.</div>';
+        $("tentar").onclick = function () { carregarUF(uf); };
+        return;
+      }
+      cache[uf] = d;
+      prepararUF(d);
+    };
+    xhr.send();
+  }
+
+  function prepararUF(d) {
+    var i, e;
+    dados = d;
+    $("uf-status").innerHTML = "";
+    munNorm = [];
+    for (i = 0; i < d.m.length; i++) munNorm.push(norm(d.m[i]));
+    escNorm = [];
+    for (i = 0; i < d.e.length; i++) { e = d.e[i]; escNorm.push(norm(e[2]) + " " + e[3]); }
+    munSel = -1; depSel = -1;
+    $("mun").value = "";
+    $("mun-escolhido").innerHTML = "";
+    mostrar("mun-busca");
+    mostrar("c-mun");
+    esconder("c-esc");
+    listarMun();
+    // Estados com um único município (DF) já seguem direto
+    if (d.m.length === 1) escolherMun(0);
+  }
+
+  // --- Municípios
+  function listarMun() {
+    var q = $("mun").value, html = "", i, idx = [], r;
+    if (tokens(q).length) {
+      r = filtrar(munNorm, function (x) { return x; }, q);
+      for (i = 0; i < r.length && i < 60; i++) idx.push(r[i].o);
+      if (!r.length) html = '<p class="aviso">Nenhum município encontrado com esse nome.</p>';
+    } else {
+      for (i = 0; i < dados.m.length && i < 60; i++) idx.push(i);
+    }
+    for (i = 0; i < idx.length; i++) {
+      html += '<li><button type="button" class="item" data-i="' + idx[i] + '">' + esc(dados.m[idx[i]]) + '</button></li>';
+    }
+    if (!tokens(q).length && dados.m.length > 60) html += '<p class="aviso">Digite para encontrar o seu município entre os ' + dados.m.length + ' do estado.</p>';
+    $("mun-lista").innerHTML = html;
+  }
+
+  function escolherMun(i) {
+    munSel = i;
+    esconder("mun-busca");
+    var nome = i >= 0 ? esc(dados.m[i]) : "Todo o estado";
+    $("mun-escolhido").innerHTML = '<div class="escolhido"><button type="button" class="link" id="troca-mun">Trocar</button><b>' + nome + '</b></div>';
+    $("troca-mun").onclick = function () {
+      $("mun-escolhido").innerHTML = ""; mostrar("mun-busca"); esconder("c-esc"); esconder("c-conf");
+      munSel = -1; $("mun").focus();
+    };
+    depSel = -1;
+    $("esc").value = "";
+    mostrar("c-esc");
+    esconder("c-conf");
+    listarEsc();
+    rolarPara("c-esc");
+  }
+
+  // --- Escolas
+  function escolasDoEscopo() {
+    var lista = [], i;
+    for (i = 0; i < dados.e.length; i++) {
+      if (munSel >= 0 && dados.e[i][0] !== munSel) continue;
+      if (depSel >= 0 && dados.e[i][1] !== depSel) continue;
+      lista.push(i);
+    }
+    return lista;
+  }
+
+  function desenharFiltros() {
+    var cont = [0, 0, 0, 0], i, html, total = 0;
+    for (i = 0; i < dados.e.length; i++) {
+      if (munSel >= 0 && dados.e[i][0] !== munSel) continue;
+      cont[dados.e[i][1]]++; total++;
+    }
+    html = '<button type="button" class="chip' + (depSel < 0 ? " on" : "") + '" data-d="-1">Todas (' + total + ')</button>';
+    for (i = 0; i < dados.d.length; i++) {
+      if (!cont[i]) continue;
+      html += '<button type="button" class="chip' + (depSel === i ? " on" : "") + '" data-d="' + i + '">' + esc(dados.d[i]) + ' (' + cont[i] + ')</button>';
+    }
+    $("filtros").innerHTML = html;
+  }
+
+  function listarEsc() {
+    var q = $("esc").value, escopo = escolasDoEscopo(), idx = [], i, r, html = "", info = "", e;
+    desenharFiltros();
+    var todoEstado = munSel < 0;
+    if (tokens(q).length) {
+      if (todoEstado && norm(q).length < 3) {
+        $("esc-lista").innerHTML = "";
+        $("esc-info").innerHTML = "Digite pelo menos 3 letras do nome ou o código INEP.";
+        return;
+      }
+      r = filtrar(escopo, function (x) { return escNorm[x]; }, q);
+      for (i = 0; i < r.length && i < CONFIG.maxResultados; i++) idx.push(r[i].it);
+      info = r.length ? (r.length === 1 ? "1 escola encontrada." : r.length + " escolas encontradas.") : "";
+      if (r.length > CONFIG.maxResultados) info += " Mostrando as " + CONFIG.maxResultados + " primeiras: digite mais palavras para filtrar.";
+      if (!r.length) info = "Nenhuma escola encontrada. Tente outra palavra do nome, ou só uma parte dela.";
+    } else if (todoEstado) {
+      info = "Digite o nome da escola ou o código INEP para buscar em todo o estado.";
+    } else {
+      for (i = 0; i < escopo.length && i < CONFIG.maxResultados; i++) idx.push(escopo[i]);
+      info = escopo.length > CONFIG.maxResultados
+        ? "Este município tem " + escopo.length + " escolas. Digite parte do nome para encontrar a sua."
+        : "Toque na sua escola na lista abaixo ou digite para filtrar.";
+    }
+    for (i = 0; i < idx.length; i++) {
+      e = dados.e[idx[i]];
+      html += '<li><button type="button" class="item" data-i="' + idx[i] + '">' + esc(e[2]) +
+        '<small>' + (todoEstado ? esc(dados.m[e[0]]) + " · " : "") + esc(dados.d[e[1]]) + " · INEP " + e[3] + '</small></button></li>';
+    }
+    $("esc-info").innerHTML = info;
+    $("esc-lista").innerHTML = html;
+  }
+
+  // --- Confirmação e envio para o Typeform
+  function montarLink(v) {
+    var partes = [], k;
+    for (k in CONFIG.campos) {
+      if (CONFIG.campos.hasOwnProperty(k) && v[k]) partes.push(CONFIG.campos[k] + "=" + encodeURIComponent(v[k]));
+    }
+    return CONFIG.typeformBase + formId + (partes.length ? "#" + partes.join("&") : "");
+  }
+
+  function confirmar(v, titulo) {
+    escolaSel = v;
+    var html = "";
+    if (v.escola) html += "<dt>Escola</dt><dd>" + esc(v.escola) + "</dd><dt>Código INEP</dt><dd>" + esc(v.inep) + "</dd>";
+    if (v.municipio) html += "<dt>Município</dt><dd>" + esc(v.municipio) + " – " + esc(v.uf) + "</dd>";
+    else html += "<dt>Estado</dt><dd>" + esc(v.uf) + "</dd>";
+    if (v.dependencia) html += "<dt>Rede</dt><dd>" + esc(v.dependencia) + "</dd>";
+    if (!v.escola) html += '<p class="aviso">Tudo bem! No formulário, você poderá escrever o nome da sua escola.</p>';
+    $("conf-titulo").innerHTML = titulo;
+    $("conf-dados").innerHTML = html;
+    $("ir").href = montarLink(v);
+    esconder("c-uf"); esconder("c-mun"); esconder("c-esc");
+    mostrar("c-conf");
+    window.scrollTo(0, 0);
+  }
+
+  // --- Utilidades de tela
+  function mostrar(id) { $(id).className = $(id).className.replace(/ ?oculto/g, ""); }
+  function esconder(id) { if ($(id).className.indexOf("oculto") < 0) $(id).className += " oculto"; }
+  function rolarPara(id) {
+    var el = $(id);
+    if (el.scrollIntoView) { try { el.scrollIntoView(true); } catch (e) {} }
+  }
+  function alvo(ev, attr) {
+    var el = ev.target || ev.srcElement;
+    while (el && el !== document && !el.getAttribute(attr)) el = el.parentNode;
+    return el && el !== document ? el : null;
+  }
+
+  // --- Eventos
+  $("uf").onchange = function () { carregarUF(this.value); };
+  $("mun").oninput = debounce(listarMun, 120);
+  $("mun").onkeyup = $("mun").oninput;
+  $("esc").oninput = debounce(listarEsc, 150);
+  $("esc").onkeyup = $("esc").oninput;
+
+  $("mun-lista").onclick = function (ev) {
+    var b = alvo(ev, "data-i"); if (b) escolherMun(parseInt(b.getAttribute("data-i"), 10));
+  };
+  $("sem-mun").onclick = function () { escolherMun(-1); $("esc").focus(); };
+
+  $("filtros").onclick = function (ev) {
+    var b = alvo(ev, "data-d"); if (!b) return;
+    depSel = parseInt(b.getAttribute("data-d"), 10); listarEsc();
+  };
+
+  $("esc-lista").onclick = function (ev) {
+    var b = alvo(ev, "data-i"); if (!b) return;
+    var e = dados.e[parseInt(b.getAttribute("data-i"), 10)];
+    confirmar({ escola: e[2], inep: String(e[3]), uf: dados.uf, municipio: dados.m[e[0]], dependencia: dados.d[e[1]] }, "Confira a escola");
+  };
+
+  $("nao-achei").onclick = function () {
+    confirmar({ uf: dados.uf, municipio: munSel >= 0 ? dados.m[munSel] : "", dependencia: depSel >= 0 ? dados.d[depSel] : "" },
+      "Não encontrou a escola?");
+  };
+
+  $("trocar").onclick = function () {
+    esconder("c-conf"); mostrar("c-uf"); mostrar("c-mun");
+    if (dados) { mostrar("c-esc"); if (munSel < 0 && !$("mun-escolhido").innerHTML) esconder("c-esc"); }
+    rolarPara(dados ? "c-esc" : "c-uf");
+  };
+
+  // Se o navegador voltar para esta página já com UF escolhida
+  if ($("uf").value) carregarUF($("uf").value);
+})();
+</script>
+</body>
+</html>
