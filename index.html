@@ -163,6 +163,9 @@ var CONFIG = {
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
+  // Escolas novas, ainda sem INEP, usam código provisório começando com "IEC"
+  function provisorio(c) { return /^IEC/i.test(String(c)); }
+  function rotuloCodigo(c) { return provisorio(c) ? "Código provisório" : "INEP"; }
   function tokens(q) { var t = norm(q); return t ? t.split(" ") : []; }
 
   // Busca: todas as palavras digitadas precisam aparecer (em qualquer ordem).
@@ -233,7 +236,7 @@ var CONFIG = {
     munNorm = [];
     for (i = 0; i < d.m.length; i++) munNorm.push(norm(d.m[i]));
     escNorm = [];
-    for (i = 0; i < d.e.length; i++) { e = d.e[i]; escNorm.push(norm(e[2]) + " " + e[3]); }
+    for (i = 0; i < d.e.length; i++) { e = d.e[i]; escNorm.push(norm(e[2] + " " + e[3])); }
     munSel = -1; depSel = -1;
     $("mun").value = "";
     $("mun-escolhido").innerHTML = "";
@@ -330,7 +333,7 @@ var CONFIG = {
     for (i = 0; i < idx.length; i++) {
       e = dados.e[idx[i]];
       html += '<li><button type="button" class="item" data-i="' + idx[i] + '">' + esc(e[2]) +
-        '<small>' + (todoEstado ? esc(dados.m[e[0]]) + " · " : "") + esc(dados.d[e[1]]) + " · INEP " + e[3] + '</small></button></li>';
+        '<small>' + (todoEstado ? esc(dados.m[e[0]]) + " · " : "") + esc(dados.d[e[1]]) + " · " + rotuloCodigo(e[3]) + " " + esc(e[3]) + '</small></button></li>';
     }
     $("esc-info").innerHTML = info;
     $("esc-lista").innerHTML = html;
@@ -348,7 +351,7 @@ var CONFIG = {
   function confirmar(v, titulo) {
     escolaSel = v;
     var html = "";
-    if (v.escola) html += "<dt>Escola</dt><dd>" + esc(v.escola) + "</dd><dt>Código INEP</dt><dd>" + esc(v.inep) + "</dd>";
+    if (v.escola) html += "<dt>Escola</dt><dd>" + esc(v.escola) + "</dd><dt>" + (provisorio(v.inep) ? "Código provisório (escola ainda sem INEP)" : "Código INEP") + "</dt><dd>" + esc(v.inep) + "</dd>";
     if (v.municipio) html += "<dt>Município</dt><dd>" + esc(v.municipio) + " – " + esc(v.uf) + "</dd>";
     else html += "<dt>Estado</dt><dd>" + esc(v.uf) + "</dd>";
     if (v.dependencia) html += "<dt>Rede</dt><dd>" + esc(v.dependencia) + "</dd>";
